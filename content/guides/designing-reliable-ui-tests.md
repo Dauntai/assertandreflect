@@ -3,6 +3,7 @@ title: Designing Reliable UI Tests
 date: 2025-02-16
 category: guides
 excerpt: Practical principles for UI tests that don't flake, don't slow you down, and actually catch bugs.
+tags: ["testing-strategy", "ui-automation"]
 ---
 
 UI tests have a reputation for being brittle. They fail when a button moves two pixels. They timeout when the network is slow. They take forever to run. But it doesn't have to be this way. Here are principles for designing UI tests that earn their keep.

@@ -5,7 +5,17 @@
     "date": "2025-02-17",
     "category": "strategy",
     "excerpt": "Reframe testing as risk management—prioritize what matters and communicate uncertainty clearly.",
-    "url": "/strategy/testing-as-risk-model.html"
+    "url": "/strategy/testing-as-risk-model.html",
+    "tags": [
+      {
+        "slug": "testing-strategy",
+        "name": "Testing Strategy"
+      },
+      {
+        "slug": "risk-based-testing",
+        "name": "Risk Based Testing"
+      }
+    ]
   },
   {
     "title": "Designing Reliable UI Tests",
@@ -13,7 +23,17 @@
     "date": "2025-02-16",
     "category": "guides",
     "excerpt": "Practical principles for UI tests that don't flake, don't slow you down, and actually catch bugs.",
-    "url": "/guides/designing-reliable-ui-tests.html"
+    "url": "/guides/designing-reliable-ui-tests.html",
+    "tags": [
+      {
+        "slug": "testing-strategy",
+        "name": "Testing Strategy"
+      },
+      {
+        "slug": "ui-automation",
+        "name": "Ui Automation"
+      }
+    ]
   },
   {
     "title": "Confidence vs Defect Counting",
@@ -21,6 +41,16 @@
     "date": "2025-02-15",
     "category": "reflections",
     "excerpt": "Why the best measure of testing success isn't how many bugs you find—it's how much confidence you create.",
-    "url": "/reflections/confidence-vs-defect-counting.html"
+    "url": "/reflections/confidence-vs-defect-counting.html",
+    "tags": [
+      {
+        "slug": "confidence-driven-testing",
+        "name": "Confidence Driven Testing"
+      },
+      {
+        "slug": "testing-metrics",
+        "name": "Testing Metrics"
+      }
+    ]
   }
 ]

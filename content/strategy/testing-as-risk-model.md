@@ -3,6 +3,7 @@ title: Testing as a Risk Model
 date: 2025-02-17
 category: strategy
 excerpt: Reframe testing as risk management—prioritize what matters and communicate uncertainty clearly.
+tags: ["testing-strategy", "risk-based-testing"]
 ---
 
 Every system has finite resources for testing. Every change carries some risk. The job of testing is not to eliminate risk—that's impossible—but to *understand it*, *reduce it where it matters most*, and *communicate what remains*.

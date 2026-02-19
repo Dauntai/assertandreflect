@@ -21,6 +21,13 @@ function slugify(str) {
     .replace(/[^a-z0-9-]/g, '');
 }
 
+function tagSlugToName(slug) {
+  return String(slug)
+    .split('-')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(' ');
+}
+
 function getSlug(filePath, frontmatter) {
   if (frontmatter.slug) return slugify(String(frontmatter.slug));
   const base = path.basename(filePath, '.md');
@@ -60,7 +67,7 @@ function configureMarkedForImages() {
   marked.setOptions({ renderer });
 }
 
-function wrapPostHtml(title, content, meta, relatedPosts) {
+function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
   const escapedTitle = escapeHtml(title);
   const escapedDesc = escapeHtml(meta.excerpt || '');
   const postUrl = `${SITE_URL}${meta.url}`;
@@ -131,6 +138,16 @@ function wrapPostHtml(title, content, meta, relatedPosts) {
       </ol>
     </nav>`;
 
+  const tagsHtml =
+    tags && tags.length > 0
+      ? `<p class="post-tags" aria-label="Tags">${tags
+          .map(
+            (t) =>
+              `<a href="/tags/${escapeHtml(t.slug)}.html" class="post-tag">${escapeHtml(t.name)}</a>`
+          )
+          .join(' ')}</p>`
+      : '';
+
   return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -173,6 +190,7 @@ function wrapPostHtml(title, content, meta, relatedPosts) {
       <header class="post-header">
         <span class="post-category-tag" aria-label="Category">${escapeHtml(categoryLabel)}</span>
         <h1>${escapedTitle}</h1>
+        ${tagsHtml}
         <p class="post-meta">
           ${publishedDate || ''}
           <span aria-hidden="true"> · </span>
@@ -196,7 +214,91 @@ function wrapPostHtml(title, content, meta, relatedPosts) {
 </html>`;
 }
 
-function generateSitemap(allPosts) {
+function generateTagPageHtml(tagSlug, tagName, posts) {
+  const escapedTagName = escapeHtml(tagName);
+  const tagUrl = `${SITE_URL}/tags/${tagSlug}.html`;
+  const metaDesc = `Articles about ${escapedTagName} in software testing and quality engineering.`;
+
+  const postsHtml =
+    posts.length === 0
+      ? '<p>No posts with this tag yet.</p>'
+      : `<ul class="posts-list">
+${posts
+  .map(
+    (p) => `        <li>
+          <a href="${escapeHtml(p.url)}">${escapeHtml(p.title)}</a>
+          <span class="excerpt">${escapeHtml(p.excerpt || '')}</span>
+          <span class="meta">${escapeHtml(p.date || '')} · ${escapeHtml(p.category)}</span>
+        </li>`
+  )
+  .join('\n')}
+      </ul>`;
+
+  return `<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapedTagName} | Assert and Reflect</title>
+  <meta name="description" content="${escapeHtml(metaDesc)}">
+  <link rel="canonical" href="${tagUrl}">
+  <meta property="og:title" content="${escapedTagName} | Assert and Reflect">
+  <meta property="og:description" content="${escapeHtml(metaDesc)}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${tagUrl}">
+  <meta property="og:site_name" content="Assert and Reflect">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="${escapedTagName} | Assert and Reflect">
+  <meta name="twitter:description" content="${escapeHtml(metaDesc)}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="/assets/css/main.css" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Assert and Reflect">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/guides/">Guides</a>
+      <a href="/strategy/">Strategy</a>
+      <a href="/reflections/">Reflections</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+    </nav>
+  </header>
+  <main class="main">
+    <header>
+      <h1 class="page-title">${escapedTagName}</h1>
+      <p>Articles about ${escapedTagName} in software testing and quality engineering.</p>
+    </header>
+    <section class="posts-section" aria-labelledby="tag-posts-heading">
+      <h2 id="tag-posts-heading">Posts</h2>
+      ${postsHtml}
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>Assert and Reflect &mdash; Testing is about creating confidence. <a href="/feed.xml">RSS</a></p>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>`;
+}
+
+function generateTagPages(tagsMap) {
+  const tagsDir = path.join(OUT_DIR, 'tags');
+  if (!fs.existsSync(tagsDir)) {
+    fs.mkdirSync(tagsDir, { recursive: true });
+  }
+  for (const [tagSlug, { name, posts }] of tagsMap) {
+    const html = generateTagPageHtml(tagSlug, name, posts);
+    fs.writeFileSync(path.join(tagsDir, `${tagSlug}.html`), html, 'utf8');
+    console.log('Built tag:', `/tags/${tagSlug}.html`);
+  }
+}
+
+function generateSitemap(allPosts, tagSlugs = []) {
   const staticUrls = [
     { loc: SITE_URL + '/', changefreq: 'weekly', priority: '1.0' },
     { loc: SITE_URL + '/about.html', changefreq: 'monthly', priority: '0.8' },
@@ -205,6 +307,12 @@ function generateSitemap(allPosts) {
     { loc: SITE_URL + '/reflections/', changefreq: 'weekly', priority: '0.9' },
   ];
 
+  const tagUrls = tagSlugs.map((slug) => ({
+    loc: SITE_URL + '/tags/' + slug + '.html',
+    changefreq: 'weekly',
+    priority: '0.7',
+  }));
+
   const postUrls = allPosts.map((p) => ({
     loc: SITE_URL + p.url,
     changefreq: 'monthly',
@@ -212,7 +320,7 @@ function generateSitemap(allPosts) {
     lastmod: p.date ? `${p.date}T00:00:00+00:00` : undefined,
   }));
 
-  const urls = [...staticUrls, ...postUrls];
+  const urls = [...staticUrls, ...tagUrls, ...postUrls];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
@@ -308,6 +416,12 @@ function build() {
       const dateStr =
         dateVal instanceof Date ? dateVal.toISOString().slice(0, 10) : String(dateVal || '');
       const readingTime = estimateReadingTime(content);
+      const rawTags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
+      const tags = rawTags.map((t) => {
+        const slug = slugify(String(t));
+        return { slug, name: slug ? tagSlugToName(slug) : String(t) };
+      }).filter((t) => t.slug);
+
       const meta = {
         title: frontmatter.title || slug,
         date: dateStr,
@@ -317,6 +431,7 @@ function build() {
         url: `/${category}/${slug}.html`,
         readingTime,
         author: frontmatter.author || 'shreenidhi',
+        tags,
       };
 
       const postEntry = {
@@ -326,6 +441,7 @@ function build() {
         category: meta.category,
         excerpt: meta.excerpt,
         url: meta.url,
+        tags: meta.tags.map((t) => ({ slug: t.slug, name: t.name })),
       };
       allPosts.push(postEntry);
       postsBySlug.set(slug, postEntry);
@@ -333,7 +449,7 @@ function build() {
       ensureHeadingHierarchy(content);
 
       const related = getRelatedPosts(slug, meta.category, allPosts);
-      const fullHtml = wrapPostHtml(meta.title, html, meta, related);
+      const fullHtml = wrapPostHtml(meta.title, html, meta, related, meta.tags);
       const outPath = path.join(outDir, `${slug}.html`);
       fs.writeFileSync(outPath, fullHtml, 'utf8');
       console.log('Built:', meta.url);
@@ -346,10 +462,31 @@ function build() {
     return db.localeCompare(da);
   });
 
+  const tagsMap = new Map();
+  for (const post of allPosts) {
+    for (const t of post.tags || []) {
+      if (!tagsMap.has(t.slug)) {
+        tagsMap.set(t.slug, { name: t.name, posts: [] });
+      }
+      tagsMap.get(t.slug).posts.push(post);
+    }
+  }
+  for (const [, data] of tagsMap) {
+    data.posts.sort((a, b) => {
+      const da = String(a.date || '0000-00-00');
+      const db = String(b.date || '0000-00-00');
+      return db.localeCompare(da);
+    });
+  }
+
+  if (tagsMap.size > 0) {
+    generateTagPages(tagsMap);
+  }
+
   fs.writeFileSync(POSTS_JSON_PATH, JSON.stringify(allPosts, null, 2), 'utf8');
   console.log('Generated posts.json with', allPosts.length, 'posts');
 
-  generateSitemap(allPosts);
+  generateSitemap(allPosts, [...tagsMap.keys()]);
   generateRssFeed(allPosts);
   generateRobotsTxt();
 

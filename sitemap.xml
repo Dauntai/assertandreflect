@@ -31,6 +31,36 @@
 
   </url>
   <url>
+    <loc>https://assertandreflect.com/tags/testing-strategy.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/risk-based-testing.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/ui-automation.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/confidence-driven-testing.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/testing-metrics.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
     <loc>https://assertandreflect.com/strategy/testing-as-risk-model.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
