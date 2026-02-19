@@ -7,6 +7,7 @@ const config = require('./site.config.js');
 const OUT_DIR = process.env.OUT_DIR ? path.resolve(__dirname, process.env.OUT_DIR) : __dirname;
 const CONTENT_DIR = path.join(__dirname, 'content');
 const POSTS_JSON_PATH = path.join(OUT_DIR, 'posts.json');
+const SEARCH_INDEX_PATH = path.join(OUT_DIR, 'search-index.json');
 const SITE_URL = config.siteUrl.replace(/\/$/, '');
 
 const CATEGORIES = ['guides', 'strategy', 'reflections'];
@@ -181,6 +182,7 @@ function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
       <a href="/guides/">Guides</a>
       <a href="/strategy/">Strategy</a>
       <a href="/reflections/">Reflections</a>
+      <div id="search-container" class="search-container"></div>
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
     </nav>
   </header>
@@ -209,6 +211,7 @@ function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
   <footer class="site-footer">
     <p>Assert and Reflect &mdash; Testing is about creating confidence. <a href="/feed.xml">RSS</a></p>
   </footer>
+  <script src="/assets/js/search.js"></script>
   <script src="/assets/js/main.js"></script>
 </body>
 </html>`;
@@ -265,6 +268,7 @@ ${posts
       <a href="/guides/">Guides</a>
       <a href="/strategy/">Strategy</a>
       <a href="/reflections/">Reflections</a>
+      <div id="search-container" class="search-container"></div>
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
     </nav>
   </header>
@@ -281,6 +285,7 @@ ${posts
   <footer class="site-footer">
     <p>Assert and Reflect &mdash; Testing is about creating confidence. <a href="/feed.xml">RSS</a></p>
   </footer>
+  <script src="/assets/js/search.js"></script>
   <script src="/assets/js/main.js"></script>
 </body>
 </html>`;
@@ -380,6 +385,18 @@ Sitemap: ${SITE_URL}/sitemap.xml
 
   fs.writeFileSync(path.join(OUT_DIR, 'robots.txt'), robots, 'utf8');
   console.log('Generated robots.txt');
+}
+
+function generateSearchIndex(allPosts) {
+  const index = allPosts.map((p) => ({
+    title: p.title || '',
+    url: p.url || '',
+    description: p.excerpt || '',
+    tags: (p.tags || []).map((t) => t.name || t.slug || t).filter(Boolean),
+    date: p.date || '',
+  }));
+  fs.writeFileSync(SEARCH_INDEX_PATH, JSON.stringify(index), 'utf8');
+  console.log('Generated search-index.json with', index.length, 'entries');
 }
 
 function ensureHeadingHierarchy(content) {
@@ -486,6 +503,7 @@ function build() {
   fs.writeFileSync(POSTS_JSON_PATH, JSON.stringify(allPosts, null, 2), 'utf8');
   console.log('Generated posts.json with', allPosts.length, 'posts');
 
+  generateSearchIndex(allPosts);
   generateSitemap(allPosts, [...tagsMap.keys()]);
   generateRssFeed(allPosts);
   generateRobotsTxt();
