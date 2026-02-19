@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Assert and Reflect</title>
+    <link>https://assertandreflect.com/</link>
+    <description>Testing is about creating confidence. Practical guides, architecture strategy, and reflections on quality.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Feb 2026 15:06:21 GMT</lastBuildDate>
+    <atom:link href="https://assertandreflect.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Testing as a Risk Model</title>
+    <link>https://assertandreflect.com/strategy/testing-as-risk-model.html</link>
+    <guid isPermaLink="true">https://assertandreflect.com/strategy/testing-as-risk-model.html</guid>
+    <description>Reframe testing as risk management—prioritize what matters and communicate uncertainty clearly.</description>
+    <pubDate>Mon, 17 Feb 2025 00:00:00 GMT</pubDate>
+    <category>strategy</category>
+  </item>
+  <item>
+    <title>Designing Reliable UI Tests</title>
+    <link>https://assertandreflect.com/guides/designing-reliable-ui-tests.html</link>
+    <guid isPermaLink="true">https://assertandreflect.com/guides/designing-reliable-ui-tests.html</guid>
+    <description>Practical principles for UI tests that don't flake, don't slow you down, and actually catch bugs.</description>
+    <pubDate>Sun, 16 Feb 2025 00:00:00 GMT</pubDate>
+    <category>guides</category>
+  </item>
+  <item>
+    <title>Confidence vs Defect Counting</title>
+    <link>https://assertandreflect.com/reflections/confidence-vs-defect-counting.html</link>
+    <guid isPermaLink="true">https://assertandreflect.com/reflections/confidence-vs-defect-counting.html</guid>
+    <description>Why the best measure of testing success isn't how many bugs you find—it's how much confidence you create.</description>
+    <pubDate>Sat, 15 Feb 2025 00:00:00 GMT</pubDate>
+    <category>reflections</category>
+  </item>
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Testing as a Risk Model",
+    "slug": "testing-as-risk-model",
+    "date": "2025-02-17",
+    "category": "strategy",
+    "excerpt": "Reframe testing as risk management—prioritize what matters and communicate uncertainty clearly.",
+    "url": "/strategy/testing-as-risk-model.html"
+  },
+  {
+    "title": "Designing Reliable UI Tests",
+    "slug": "designing-reliable-ui-tests",
+    "date": "2025-02-16",
+    "category": "guides",
+    "excerpt": "Practical principles for UI tests that don't flake, don't slow you down, and actually catch bugs.",
+    "url": "/guides/designing-reliable-ui-tests.html"
+  },
+  {
+    "title": "Confidence vs Defect Counting",
+    "slug": "confidence-vs-defect-counting",
+    "date": "2025-02-15",
+    "category": "reflections",
+    "excerpt": "Why the best measure of testing success isn't how many bugs you find—it's how much confidence you create.",
+    "url": "/reflections/confidence-vs-defect-counting.html"
+  }
+]
