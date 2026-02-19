@@ -228,7 +228,7 @@ function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
     </article>
   </main>
   <footer class="site-footer">
-    <p>Assert and Reflect &mdash; Testing is about creating confidence. <a href="/feed.xml">RSS</a></p>
+    <p>Assert and Reflect &mdash; Testing is about creating confidence. <a href="/feed.xml">RSS</a> · <a href="/privacy.html">Privacy</a></p>
   </footer>
   <script src="/assets/js/search.js"></script>
   <script src="/assets/js/main.js"></script>
@@ -302,7 +302,7 @@ ${posts
     </section>
   </main>
   <footer class="site-footer">
-    <p>Assert and Reflect &mdash; Testing is about creating confidence. <a href="/feed.xml">RSS</a></p>
+    <p>Assert and Reflect &mdash; Testing is about creating confidence. <a href="/feed.xml">RSS</a> · <a href="/privacy.html">Privacy</a></p>
   </footer>
   <script src="/assets/js/search.js"></script>
   <script src="/assets/js/main.js"></script>
@@ -326,6 +326,7 @@ function generateSitemap(allPosts, tagSlugs = []) {
   const staticUrls = [
     { loc: SITE_URL + '/', changefreq: 'weekly', priority: '1.0' },
     { loc: SITE_URL + '/about.html', changefreq: 'monthly', priority: '0.8' },
+    { loc: SITE_URL + '/privacy.html', changefreq: 'yearly', priority: '0.5' },
     { loc: SITE_URL + '/guides/', changefreq: 'weekly', priority: '0.9' },
     { loc: SITE_URL + '/strategy/', changefreq: 'weekly', priority: '0.9' },
     { loc: SITE_URL + '/reflections/', changefreq: 'weekly', priority: '0.9' },
@@ -544,7 +545,7 @@ function build() {
     const processWithNewsletter = (content) =>
       content.replace('<!-- NEWSLETTER -->', newsletterHtml);
 
-    for (const f of ['index.html', 'about.html']) {
+    for (const f of ['index.html', 'about.html', 'privacy.html']) {
       const src = path.join(__dirname, f);
       const dest = path.join(OUT_DIR, f);
       if (fs.existsSync(src)) {
