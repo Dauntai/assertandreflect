@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Designing Reliable UI Tests | Assert and Reflect</title>
+  <meta name="description" content="Practical principles for UI tests that don't flake, don't slow you down, and actually catch bugs.">
+  <link rel="canonical" href="https://assertandreflect.com/guides/designing-reliable-ui-tests.html">
+  <meta property="og:title" content="Designing Reliable UI Tests | Assert and Reflect">
+  <meta property="og:description" content="Practical principles for UI tests that don't flake, don't slow you down, and actually catch bugs.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://assertandreflect.com/guides/designing-reliable-ui-tests.html">
+  <meta property="og:site_name" content="Assert and Reflect">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Designing Reliable UI Tests | Assert and Reflect">
+  <meta name="twitter:description" content="Practical principles for UI tests that don't flake, don't slow you down, and actually catch bugs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="/assets/css/main.css" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Assert and Reflect">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Designing Reliable UI Tests","description":"Practical principles for UI tests that don't flake, don't slow you down, and actually catch bugs.","datePublished":"2025-02-16T00:00:00+00:00","dateModified":"2025-02-16T00:00:00+00:00","wordCount":334,"author":{"@type":"Person","name":"Shreenidhi VN","jobTitle":"Software Quality Engineer","description":"Advocate for confidence-driven testing and systemic quality thinking","url":"https://assertandreflect.com/about.html","sameAs":["https://www.linkedin.com/in/shreenidhivn","https://github.com/shreenidhivn"]},"publisher":{"@type":"Organization","name":"Assert and Reflect","url":"https://assertandreflect.com"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://assertandreflect.com/guides/designing-reliable-ui-tests.html"},"url":"https://assertandreflect.com/guides/designing-reliable-ui-tests.html"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://assertandreflect.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://assertandreflect.com/guides/"},{"@type":"ListItem","position":3,"name":"Designing Reliable UI Tests","item":"https://assertandreflect.com/guides/designing-reliable-ui-tests.html"}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/guides/">Guides</a>
+      <a href="/strategy/">Strategy</a>
+      <a href="/reflections/">Reflections</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+    </nav>
+  </header>
+  <main class="main post-main">
+    
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li aria-current="page">Designing Reliable UI Tests</li>
+      </ol>
+    </nav>
+    <article class="post">
+      <header class="post-header">
+        <span class="post-category-tag" aria-label="Category">Guides</span>
+        <h1>Designing Reliable UI Tests</h1>
+        <p class="post-meta">
+          2025-02-16
+          <span aria-hidden="true"> · </span>
+          <span class="reading-time">2 min read</span>
+          <span aria-hidden="true"> · </span>
+          Guides
+        </p>
+      </header>
+      <div class="post-content">
+        <p>UI tests have a reputation for being brittle. They fail when a button moves two pixels. They timeout when the network is slow. They take forever to run. But it doesn&#39;t have to be this way. Here are principles for designing UI tests that earn their keep.</p>
+<h2>1. Test Behavior, Not Implementation</h2>
+<p>Don&#39;t couple your tests to CSS classes, DOM structure, or implementation details. Couple them to <em>user-visible behavior</em>.</p>
+<pre><code class="language-javascript">// Fragile: breaks when class names change
+await page.click(&#39;.btn-primary.submit-form&#39;);
+
+// Better: use role, label, or test ID that reflects intent
+await page.click(&#39;button[type=&quot;submit&quot;]&#39;);
+// or: getByRole(&#39;button&#39;, { name: &#39;Submit&#39; })
+</code></pre>
+<p>If the user doesn&#39;t care about a class name, your test shouldn&#39;t either.</p>
+<h2>2. Use Stable Selectors</h2>
+<p>Prefer semantic attributes over layout:</p>
+<ul>
+<li><code>role</code> and <code>aria-label</code> for accessibility-minded selectors</li>
+<li><code>data-testid</code> when you need a hook and nothing else fits</li>
+<li>Avoid: nth-child, generic class names, long XPath chains</li>
+</ul>
+<p>When you add a <code>data-testid</code>, you&#39;re making a contract: &quot;This element is important for testing.&quot; That&#39;s okay. Just keep the IDs meaningful and stable.</p>
+<h2>3. Wait for Real Conditions</h2>
+<p>Don&#39;t rely on fixed <code>sleep()</code> calls. Wait for the state you actually care about:</p>
+<ul>
+<li>Element visible and stable</li>
+<li>Network request completed</li>
+<li>Animation finished</li>
+</ul>
+<p>Most test frameworks provide <code>waitFor</code>-style APIs. Use them. A test that sleeps for 3 seconds is either slow or still flaky.</p>
+<h2>4. Isolate Tests</h2>
+<p>Each test should be independent. Don&#39;t assume a previous test left the system in a known state. Use fixtures, setup/teardown, or a fresh session. Shared state is the enemy of reliable tests.</p>
+<h2>5. Keep the Feedback Loop Tight</h2>
+<p>If your UI suite takes 30 minutes, people will stop running it. Prioritize:</p>
+<ul>
+<li>A small smoke suite that runs in minutes</li>
+<li>Parallelization for the full suite</li>
+<li>Clear failure messages so you know <em>what</em> broke, not just <em>that</em> it broke</li>
+</ul>
+<h2>Summary</h2>
+<p>Reliable UI tests are possible. They require discipline: stable selectors, behavioral focus, proper waiting, isolation, and a fast feedback loop. Invest in these, and your UI tests will start to feel like assets instead of liabilities.</p>
+
+      </div>
+      <p class="post-byline">Written by <a href="/about.html">Shreenidhi VN</a></p>
+      
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p>Assert and Reflect &mdash; Testing is about creating confidence. <a href="/feed.xml">RSS</a></p>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
