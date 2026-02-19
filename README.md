@@ -83,7 +83,7 @@ The site is fully static: HTML, CSS, and minimal vanilla JavaScript. No backend 
 
 3. Write your content in Markdown. Use one H1 (the title) and multiple `##` (H2) / `###` (H3) for SEO. The build will warn if headings are missing.
 
-4. **Images** (optional): Place in `assets/images/` with descriptive filenames (e.g. `ui-test-selectors-diagram.png`). Use `![Alt text describing the image](/assets/images/filename.png)` — alt text is required for accessibility and SEO.
+4. **Images** (optional): Place in `assets/images/posts/<post-slug>/` (e.g. `assets/images/posts/confidence-vs-defect-counting/diagram.svg`). Use `![Descriptive alt text](/assets/images/posts/<slug>/<filename>)` — alt text is required for accessibility. See `editorial-style.md` for hero images and examples.
 
 5. Run the build: `npm run build`
 

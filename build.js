@@ -58,12 +58,52 @@ function getRelatedPosts(currentSlug, currentCategory, allPosts, limit = 3) {
   return related;
 }
 
+/** Build context for image renderer (slug, filePath) - set before parsing each post */
+let currentBuildContext = { slug: '', filePath: '' };
+
+/**
+ * Try to extract width/height from an image file. Supports SVG (attributes or viewBox).
+ * Returns { width, height } or undefined if not available.
+ */
+function getImageDimensions(href, slug) {
+  if (!href || typeof href !== 'string') return undefined;
+  const m = href.match(/^\/assets\/images\/posts\/([^/]+)\/(.+)$/);
+  if (!m) return undefined;
+  const [, postSlug, filename] = m;
+  const ext = path.extname(filename).toLowerCase();
+  if (ext !== '.svg') return undefined;
+  const assetsDir = path.join(__dirname, 'assets', 'images', 'posts', postSlug);
+  const filePath = path.join(assetsDir, filename);
+  if (!fs.existsSync(filePath)) return undefined;
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const widthMatch = content.match(/<svg[^>]*\s(?:width="(\d+)"|width="(\d+)px")/i);
+    const heightMatch = content.match(/<svg[^>]*\s(?:height="(\d+)"|height="(\d+)px")/i);
+    const viewBoxMatch = content.match(/<svg[^>]*\sviewBox="\s*[\d.-]+\s+[\d.-]+\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s*"/i);
+    let w, h;
+    if (widthMatch) w = widthMatch[1] || widthMatch[2];
+    if (heightMatch) h = heightMatch[1] || heightMatch[2];
+    if ((!w || !h) && viewBoxMatch) {
+      w = w || Math.round(parseFloat(viewBoxMatch[1]));
+      h = h || Math.round(parseFloat(viewBoxMatch[2]));
+    }
+    if (w && h) return { width: w, height: h };
+  } catch (_) {}
+  return undefined;
+}
+
 function configureMarkedForImages() {
   const renderer = new marked.Renderer();
-  const defaultImage = renderer.image.bind(renderer);
   renderer.image = function (href, title, text) {
-    const alt = text && text.trim() ? text : path.basename(href, path.extname(href)).replace(/[-_]/g, ' ');
-    return defaultImage(href, title, alt);
+    const hasAlt = text && String(text).trim().length > 0;
+    const alt = hasAlt ? String(text).trim() : path.basename(href, path.extname(href)).replace(/[-_]/g, ' ');
+    if (!hasAlt && currentBuildContext.slug) {
+      console.warn(`  ⚠ Missing alt text for image "${href}" in post ${currentBuildContext.slug} — using fallback`);
+    }
+    const dims = getImageDimensions(href, currentBuildContext.slug);
+    const dimAttrs = dims ? ` width="${dims.width}" height="${dims.height}"` : '';
+    const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
+    return `<img src="${escapeHtml(href)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async"${dimAttrs}${titleAttr}>`;
   };
   marked.setOptions({ renderer });
 }
@@ -84,7 +124,7 @@ function getNewsletterHtml(buttondownToken = '') {
     </aside>`;
 }
 
-function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
+function wrapPostHtml(title, content, meta, relatedPosts, tags = [], heroImage = '', heroImageAlt = '') {
   const escapedTitle = escapeHtml(title);
   const escapedDesc = escapeHtml(meta.excerpt || '');
   const postUrl = `${SITE_URL}${meta.url}`;
@@ -210,6 +250,7 @@ function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
       <header class="post-header">
         <span class="post-category-tag" aria-label="Category">${escapeHtml(categoryLabel)}</span>
         <h1>${escapedTitle}</h1>
+        ${heroImage ? `<figure class="post-hero-image"><img src="${escapeHtml(heroImage)}" alt="${escapeHtml(heroImageAlt || title)}" loading="lazy" decoding="async"></figure>` : ''}
         ${tagsHtml}
         <p class="post-meta">
           ${publishedDate || ''}
@@ -448,6 +489,7 @@ function build() {
       const raw = fs.readFileSync(filePath, 'utf8');
       const { data: frontmatter, content } = matter(raw);
       const slug = getSlug(filePath, frontmatter);
+      currentBuildContext = { slug, filePath };
       const html = marked.parse(content);
       const dateVal = frontmatter.date;
       const dateStr =
@@ -486,7 +528,9 @@ function build() {
       ensureHeadingHierarchy(content);
 
       const related = getRelatedPosts(slug, meta.category, allPosts);
-      const fullHtml = wrapPostHtml(meta.title, html, meta, related, meta.tags);
+      const heroImage = frontmatter.heroImage || '';
+      const heroImageAlt = frontmatter.heroImageAlt || '';
+      const fullHtml = wrapPostHtml(meta.title, html, meta, related, meta.tags, heroImage, heroImageAlt);
       const outPath = path.join(outDir, `${slug}.html`);
       fs.writeFileSync(outPath, fullHtml, 'utf8');
       console.log('Built:', meta.url);

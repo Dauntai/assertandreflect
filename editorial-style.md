@@ -101,9 +101,98 @@ tags: ["tag-1", "tag-2", "tag-3"]
 - Use existing tags when they fit. Create new tags sparingly.
 - Tags should be lowercase, hyphenated (e.g., `testing-strategy`, `risk-based-testing`).
 
+### Images (Optional)
+
+Images are optional. Posts render correctly with or without them. No placeholder images.
+
+**Folder structure:** Store images under `/assets/images/posts/<post-slug>/`. Example: for post `confidence-vs-defect-counting`, use `/assets/images/posts/confidence-vs-defect-counting/diagram.svg`.
+
+**Markdown syntax:**
+```markdown
+![Descriptive alt text](/assets/images/posts/<slug>/<image-name>.svg)
+```
+
+**Alt text:** Required for accessibility. Use descriptive alt text that conveys the image's meaning. Examples:
+- `![Confidence vs time graph showing how testing builds confidence over time](/assets/images/posts/confidence-vs-defect-counting/diagram.svg)`
+- `![Flowchart of risk-based test prioritization decisions](/assets/images/posts/risk-prioritization/flow.svg)`
+- `![Screenshot of the test results dashboard with pass/fail summary](/assets/images/posts/ui-automation/dashboard.png)`
+
+Missing alt text triggers a build warning but does not fail the build.
+
+**Hero image (optional):** Add to frontmatter for a banner image below the title:
+```yaml
+heroImage: /assets/images/posts/<slug>/hero.svg
+heroImageAlt: Brief description of the hero image
+```
+
 ---
 
-## 5. Closing Philosophy
+## 5. Image Prompt Guide
+
+All site images must follow a **consistent visual style** so the site feels cohesive. Use this guide when creating or commissioning images (including AI-generated).
+
+### Site Image Style
+
+| Rule | Description |
+|------|-------------|
+| **Minimal** | Few elements. No clutter. Every line earns its place. |
+| **Color** | Black and white only, OR a single accent color (e.g. site blue). No gradients, no multi-color palettes. |
+| **Line-based** | Clean strokes, line art, diagram aesthetic. No fills, gradients, or shadows. |
+| **Consistent** | Same stroke weight, same font treatment, same level of detail across all images. |
+| **Small** | Optimized for web. Prefer SVG. Keep dimensions modest (e.g. hero 600×120, inline 400×200). |
+
+**Style keywords for prompts:** minimal line art, monochrome, single color, geometric, flat, no gradients, no shadows, vector style, diagram infographic, clean strokes.
+
+---
+
+### How to Write Image Prompts
+
+1. **Lead with the style** — Put the site style first so the AI locks in consistency.
+2. **Describe the subject** — What the image shows (e.g. checkmark, graph, flowchart).
+3. **Specify constraints** — Black and white, single color, no text (or minimal text if needed).
+4. **Add dimensions** — Approximate aspect ratio or size (e.g. wide banner, square).
+
+**Template:**
+```
+[Style]: Minimal line art, monochrome, single color, geometric, flat, no gradients, no shadows, vector style, diagram infographic, clean strokes.
+
+[Subject]: [What the image shows.]
+
+[Constraints]: Black and white only. [No text / minimal text only.] [Aspect ratio if relevant.]
+```
+
+---
+
+### Prompts for Current Images
+
+| Image | Location | Purpose |
+|-------|----------|---------|
+| **hero.svg** | `confidence-vs-defect-counting` | Hero banner |
+| **confidence-diagram.svg** | `confidence-vs-defect-counting` | Inline infographic |
+
+**hero.svg (copy-paste):**
+```
+Minimal line art, monochrome, single color, geometric, flat, no gradients, no shadows, vector style. A checkmark inside a circle on the left, with space for short text on the right. Clean strokes, diagram aesthetic. Black and white only. Wide banner format, approximately 5:1 aspect ratio. SVG-friendly.
+```
+
+**confidence-diagram.svg (copy-paste):**
+```
+Minimal line art, monochrome, single color, geometric, flat, no gradients, no shadows, vector style. Simple coordinate axes: horizontal axis labeled "Time", vertical axis labeled "Confidence". Clean lines, diagram infographic. Black and white only. Landscape format, approximately 2:1 aspect ratio. SVG-friendly.
+```
+
+---
+
+### When Adding New Images
+
+1. Copy the **Style** block from the template above into every prompt.
+2. Replace the **Subject** with the new image’s content.
+3. Keep **Constraints** (B&W or single color, no gradients, no shadows).
+4. Add the prompt to this table in the guide so future images stay consistent.
+5. Export as SVG when possible; optimize for small file size.
+
+---
+
+## 6. Closing Philosophy
 
 ### Clarity Over Volume
 
@@ -130,3 +219,4 @@ Before publishing, verify:
 - [ ] One H1; logical H2/H3 hierarchy
 - [ ] Frontmatter complete: title, date, category, excerpt, tags
 - [ ] Clarity over volume; depth over trend-chasing
+- [ ] Images (if any): minimal, B&W or single color, consistent with Image Prompt Guide

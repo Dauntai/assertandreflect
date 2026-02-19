@@ -4,6 +4,8 @@ date: 2025-02-15
 category: reflections
 excerpt: Why the best measure of testing success isn't how many bugs you find—it's how much confidence you create.
 tags: ["confidence-driven-testing", "testing-metrics"]
+heroImage: /assets/images/posts/confidence-vs-defect-counting/hero.svg
+heroImageAlt: Diagram showing confidence as the primary goal of testing
 ---
 
 We've all been in meetings where someone asks: "How many defects did QA find this sprint?" It's a seductive question. Numbers are easy to report. They fit neatly into dashboards. They give the illusion of control.
@@ -20,6 +22,9 @@ When we measure success by defect count, we create perverse incentives. Testers 
 - Treating quality as adversarial instead of collaborative
 
 When we measure success by confidence, we ask different questions:
+
+![Confidence vs time graph showing how testing builds confidence over time](/assets/images/posts/confidence-vs-defect-counting/confidence-diagram.svg)
+
 - Can we ship this release?
 - What's still uncertain?
 - Where are the gaps in our coverage?
