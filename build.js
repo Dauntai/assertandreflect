@@ -68,6 +68,22 @@ function configureMarkedForImages() {
   marked.setOptions({ renderer });
 }
 
+function getNewsletterHtml(buttondownToken = '') {
+  if (!buttondownToken || !String(buttondownToken).trim()) return '';
+  const token = `value="${escapeHtml(buttondownToken)}"`;
+  return `
+    <aside class="newsletter-section" aria-labelledby="newsletter-heading">
+      <h2 id="newsletter-heading">Subscribe</h2>
+      <p>Subscribe to receive new essays on testing, risk, and quality engineering.</p>
+      <form class="newsletter-form" action="https://buttondown.com/api/v1/subscribe" method="post" target="_blank">
+        <input type="hidden" name="buttondown_token" ${token}>
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="newsletter-privacy">No spam. Unsubscribe anytime.</p>
+    </aside>`;
+}
+
 function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
   const escapedTitle = escapeHtml(title);
   const escapedDesc = escapeHtml(meta.excerpt || '');
@@ -129,6 +145,8 @@ function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
       </ul>
     </aside>`
       : '';
+
+  const newsletterHtml = getNewsletterHtml(config.newsletter?.buttondownToken || '');
 
   const breadcrumbHtml = `
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -206,6 +224,7 @@ function wrapPostHtml(title, content, meta, relatedPosts, tags = []) {
       </div>
       <p class="post-byline">Written by <a href="/about.html">${escapeHtml(AUTHOR.name)}</a></p>
       ${relatedHtml}
+      ${newsletterHtml}
     </article>
   </main>
   <footer class="site-footer">
@@ -521,11 +540,17 @@ function build() {
   }
 
   if (OUT_DIR !== __dirname) {
-    const staticFiles = ['index.html', 'about.html'];
-    for (const f of staticFiles) {
+    const newsletterHtml = getNewsletterHtml(config.newsletter?.buttondownToken || '');
+    const processWithNewsletter = (content) =>
+      content.replace('<!-- NEWSLETTER -->', newsletterHtml);
+
+    for (const f of ['index.html', 'about.html']) {
       const src = path.join(__dirname, f);
+      const dest = path.join(OUT_DIR, f);
       if (fs.existsSync(src)) {
-        fs.copyFileSync(src, path.join(OUT_DIR, f));
+        let content = fs.readFileSync(src, 'utf8');
+        if (f === 'index.html') content = processWithNewsletter(content);
+        fs.writeFileSync(dest, content, 'utf8');
         console.log('Copied:', f);
       }
     }
@@ -540,7 +565,9 @@ function build() {
       if (fs.existsSync(catIndex)) {
         const catDestDir = path.join(OUT_DIR, cat);
         if (!fs.existsSync(catDestDir)) fs.mkdirSync(catDestDir, { recursive: true });
-        fs.copyFileSync(catIndex, path.join(catDestDir, 'index.html'));
+        let content = fs.readFileSync(catIndex, 'utf8');
+        content = processWithNewsletter(content);
+        fs.writeFileSync(path.join(catDestDir, 'index.html'), content, 'utf8');
         console.log('Copied:', cat + '/index.html');
       }
     }

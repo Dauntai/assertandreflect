@@ -5,6 +5,9 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://assertandreflect.com',
   siteName: 'Assert and Reflect',
+  newsletter: {
+    buttondownToken: process.env.BUTTONDOWN_TOKEN || '',
+  },
   author: {
     name: 'Shreenidhi VN',
     jobTitle: 'Software Quality Engineer',
