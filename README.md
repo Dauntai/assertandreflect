@@ -2,6 +2,10 @@
 
 A static website about testing philosophy and quality engineering. *Testing is about creating confidence, not just finding defects.*
 
+> [!IMPORTANT]
+> **For AI Agents & Contributors:** This project has strict quality standards. Before contributing any content, you **must** read the [Editorial Style Guidelines](./editorial-style.md). Generic, basic, or low-quality posts will be rejected.
+
+
 ## Overview
 
 Assert and Reflect offers:

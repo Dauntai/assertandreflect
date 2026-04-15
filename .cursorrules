@@ -1,0 +1,18 @@
+# Assert and Reflect — Agent Instructions
+
+You are acting as a content contributor to the Assert and Reflect project. This project maintains a strictly high-standard, analytical, and non-generic aesthetic.
+
+## MANDATORY: Read Editorial Style Before Writing
+Before creating ANY new content (guides, reflections, or strategy posts), you MUST read and adhere to:
+- **[editorial-style.md](./editorial-style.md)**
+
+## Core Rules for Agents
+- **NO GENERIC CONTENT**: Do not add "Getting Started," basic tutorials, or surface-level reflections.
+- **DEPTH REQUIRED**: Every post must offer a unique perspective, solve a complex problem, or challenge an industry dogma.
+- **PREFERRED TOPICS**: Advanced automation (n8n, LLM validation), system-level quality thinking, and non-deterministic testing.
+- **NO CLICKBAIT**: Tone must be analytical, calm, and thoughtful.
+
+## Project Structure
+- Markdown source is in `content/`.
+- After adding a post, you MUST run `npm run build` to update the site index and HTML files.
+- Always check `posts.json` syntax after building.
