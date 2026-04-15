@@ -53,4 +53,58 @@
       }
     ]
   }
+  {
+    "title": "Automating UI Testing Workflows",
+    "slug": "automating-ui-testing-workflows",
+    "date": "2026-04-15",
+    "category": "guides",
+    "excerpt": "Practical steps to automate UI test workflows so they run reliably and provide fast feedback.",
+    "url": "/guides/automating-ui-testing-workflows.html",
+    "tags": [
+      {
+        "slug": "ui-automation",
+        "name": "Ui Automation"
+      },
+      {
+        "slug": "testing-strategy",
+        "name": "Testing Strategy"
+      }
+    ]
+  },
+  {
+    "title": "Practical UI Test Automation — A Short Tutorial",
+    "slug": "practical-ui-test-automation-tutorial",
+    "date": "2026-04-15",
+    "category": "guides",
+    "excerpt": "A concise, hands-on tutorial to write a reliable UI test from scratch and make it part of your workflow.",
+    "url": "/guides/practical-ui-test-automation-tutorial.html",
+    "tags": [
+      {
+        "slug": "tutorial",
+        "name": "Tutorial"
+      },
+      {
+        "slug": "ui-automation",
+        "name": "Ui Automation"
+      }
+    ]
+  },
+  {
+    "title": "Tightening Testing Feedback Loops",
+    "slug": "tightening-testing-feedback-loops",
+    "date": "2026-04-15",
+    "category": "reflections",
+    "excerpt": "Short reflection on why fast feedback matters and practical ways to tighten your testing feedback loop.",
+    "url": "/reflections/tightening-testing-feedback-loops.html",
+    "tags": [
+      {
+        "slug": "testing-strategy",
+        "name": "Testing Strategy"
+      },
+      {
+        "slug": "testing-metrics",
+        "name": "Testing Metrics"
+      }
+    ]
+  }
 ]
