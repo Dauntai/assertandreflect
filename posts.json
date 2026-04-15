@@ -1,55 +1,45 @@
 [
   {
-    "title": "Automating UI Testing Workflows",
-    "slug": "automating-ui-testing-workflows",
+    "title": "Orchestrating Autonomous Test Workflows with n8n",
+    "slug": "orchestrating-autonomous-test-workflows-n8n",
     "date": "2026-04-15",
     "category": "guides",
-    "excerpt": "Practical steps to automate UI test workflows so they run reliably and provide fast feedback.",
-    "url": "/guides/automating-ui-testing-workflows.html",
+    "excerpt": "Moving beyond linear CI scripts to dynamic, event-driven test orchestration using n8n and AI agents.",
+    "url": "/guides/orchestrating-autonomous-test-workflows-n8n.html",
     "tags": [
       {
-        "slug": "ui-automation",
-        "name": "Ui Automation"
+        "slug": "n8n",
+        "name": "N8n"
       },
       {
-        "slug": "testing-strategy",
-        "name": "Testing Strategy"
+        "slug": "test-orchestration",
+        "name": "Test Orchestration"
+      },
+      {
+        "slug": "ai-in-testing",
+        "name": "Ai In Testing"
       }
     ]
   },
   {
-    "title": "Practical UI Test Automation — A Short Tutorial",
-    "slug": "practical-ui-test-automation-tutorial",
-    "date": "2026-04-15",
-    "category": "guides",
-    "excerpt": "A concise, hands-on tutorial to write a reliable UI test from scratch and make it part of your workflow.",
-    "url": "/guides/practical-ui-test-automation-tutorial.html",
-    "tags": [
-      {
-        "slug": "ui-automation",
-        "name": "Ui Automation"
-      },
-      {
-        "slug": "tutorial",
-        "name": "Tutorial"
-      }
-    ]
-  },
-  {
-    "title": "Tightening Testing Feedback Loops",
-    "slug": "tightening-testing-feedback-loops",
+    "title": "Testing the Unpredictable — Strategies for LLM Validation",
+    "slug": "testing-the-unpredictable-llm-validation",
     "date": "2026-04-15",
     "category": "reflections",
-    "excerpt": "Short reflection on why fast feedback matters and practical ways to tighten your testing feedback loop.",
-    "url": "/reflections/tightening-testing-feedback-loops.html",
+    "excerpt": "When software becomes non-deterministic, your testing philosophy must shift from \"assert equal\" to \"evaluate probability.\"",
+    "url": "/reflections/testing-the-unpredictable-llm-validation.html",
     "tags": [
       {
-        "slug": "testing-strategy",
-        "name": "Testing Strategy"
+        "slug": "ai-testing",
+        "name": "Ai Testing"
       },
       {
-        "slug": "testing-metrics",
-        "name": "Testing Metrics"
+        "slug": "llm-ops",
+        "name": "Llm Ops"
+      },
+      {
+        "slug": "quality-engineering",
+        "name": "Quality Engineering"
       }
     ]
   },

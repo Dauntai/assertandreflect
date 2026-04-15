@@ -5,29 +5,21 @@
     <link>https://assertandreflect.com/</link>
     <description>Testing is about creating confidence. Practical guides, architecture strategy, and reflections on quality.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Apr 2026 16:23:51 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2026 16:39:44 GMT</lastBuildDate>
     <atom:link href="https://assertandreflect.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
-    <title>Automating UI Testing Workflows</title>
-    <link>https://assertandreflect.com/guides/automating-ui-testing-workflows.html</link>
-    <guid isPermaLink="true">https://assertandreflect.com/guides/automating-ui-testing-workflows.html</guid>
-    <description>Practical steps to automate UI test workflows so they run reliably and provide fast feedback.</description>
+    <title>Orchestrating Autonomous Test Workflows with n8n</title>
+    <link>https://assertandreflect.com/guides/orchestrating-autonomous-test-workflows-n8n.html</link>
+    <guid isPermaLink="true">https://assertandreflect.com/guides/orchestrating-autonomous-test-workflows-n8n.html</guid>
+    <description>Moving beyond linear CI scripts to dynamic, event-driven test orchestration using n8n and AI agents.</description>
     <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
     <category>guides</category>
   </item>
   <item>
-    <title>Practical UI Test Automation — A Short Tutorial</title>
-    <link>https://assertandreflect.com/guides/practical-ui-test-automation-tutorial.html</link>
-    <guid isPermaLink="true">https://assertandreflect.com/guides/practical-ui-test-automation-tutorial.html</guid>
-    <description>A concise, hands-on tutorial to write a reliable UI test from scratch and make it part of your workflow.</description>
-    <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
-    <category>guides</category>
-  </item>
-  <item>
-    <title>Tightening Testing Feedback Loops</title>
-    <link>https://assertandreflect.com/reflections/tightening-testing-feedback-loops.html</link>
-    <guid isPermaLink="true">https://assertandreflect.com/reflections/tightening-testing-feedback-loops.html</guid>
-    <description>Short reflection on why fast feedback matters and practical ways to tighten your testing feedback loop.</description>
+    <title>Testing the Unpredictable — Strategies for LLM Validation</title>
+    <link>https://assertandreflect.com/reflections/testing-the-unpredictable-llm-validation.html</link>
+    <guid isPermaLink="true">https://assertandreflect.com/reflections/testing-the-unpredictable-llm-validation.html</guid>
+    <description>When software becomes non-deterministic, your testing philosophy must shift from &quot;assert equal&quot; to &quot;evaluate probability.&quot;</description>
     <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
     <category>reflections</category>
   </item>

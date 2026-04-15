@@ -37,7 +37,37 @@
 
   </url>
   <url>
-    <loc>https://assertandreflect.com/tags/ui-automation.html</loc>
+    <loc>https://assertandreflect.com/tags/n8n.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/test-orchestration.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/ai-in-testing.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/ai-testing.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/llm-ops.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/quality-engineering.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
 
@@ -49,19 +79,13 @@
 
   </url>
   <url>
-    <loc>https://assertandreflect.com/tags/tutorial.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-
-  </url>
-  <url>
-    <loc>https://assertandreflect.com/tags/testing-metrics.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-
-  </url>
-  <url>
     <loc>https://assertandreflect.com/tags/risk-based-testing.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/tags/ui-automation.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
 
@@ -73,19 +97,19 @@
 
   </url>
   <url>
-    <loc>https://assertandreflect.com/guides/automating-ui-testing-workflows.html</loc>
+    <loc>https://assertandreflect.com/tags/testing-metrics.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+
+  </url>
+  <url>
+    <loc>https://assertandreflect.com/guides/orchestrating-autonomous-test-workflows-n8n.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod>2026-04-15T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://assertandreflect.com/guides/practical-ui-test-automation-tutorial.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-04-15T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://assertandreflect.com/reflections/tightening-testing-feedback-loops.html</loc>
+    <loc>https://assertandreflect.com/reflections/testing-the-unpredictable-llm-validation.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod>2026-04-15T00:00:00+00:00</lastmod>
