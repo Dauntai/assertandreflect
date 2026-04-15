@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200" aria-hidden="true">
+  <rect width="400" height="200" fill="transparent"/>
+  <line x1="50" y1="100" x2="350" y2="100" stroke="currentColor" stroke-width="1"/>
+  <line x1="200" y1="50" x2="200" y2="150" stroke="currentColor" stroke-width="1"/>
+  <text x="200" y="40" font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle">Confidence</text>
+  <text x="360" y="110" font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle">Time</text>
+</svg>
