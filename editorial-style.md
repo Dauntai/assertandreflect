@@ -192,7 +192,28 @@ Minimal line art, monochrome, single color, geometric, flat, no gradients, no sh
 
 ---
 
-## 6. Closing Philosophy
+---
+
+## 6. Instructions for AI Agents
+
+When contributing content to AssertAndReflect, agents must adhere to these strict standards to maintain the site's quality and "UltraMode" aesthetic.
+
+### Avoid Generic Content
+
+- **No Beginner Tutorials:** Do not add "getting started" guides or "how to write your first test" style tutorials unless they offer a highly unique perspective or solve a non-trivial problem.
+- **No Surface-Level Content:** Reflections must go beyond "fast feedback is good." They should explore the friction of implementation, the psychological impact on teams, or systemic trade-offs.
+- **Specialize or Skip:** If you cannot provide deep, technical, or unique insight on a topic, do not write about it.
+
+### Preferred Topics
+
+- **Advanced Automation:** Multi-tool orchestration (e.g., n8n, LangChain for testing).
+- **Testing AI:** Nuances of validating LLM outputs, prompt stability, and non-deterministic systems.
+- **Systems Thinking:** How testing architecture affects organizational velocity.
+- **Critical Reflections:** Challenging industry dogmas (e.g., "why 100% coverage is a technical debt factory").
+
+---
+
+## 7. Closing Philosophy
 
 ### Clarity Over Volume
 
