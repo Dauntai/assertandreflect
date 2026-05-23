@@ -4,7 +4,7 @@ date: 2025-05-23
 category: reflections
 excerpt: "This is a test draft created by n8n."
 tags: ["test"]
-draft: true
+draft: false
 ---
 
 ## This is a test
