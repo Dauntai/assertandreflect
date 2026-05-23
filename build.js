@@ -41,6 +41,14 @@ function estimateReadingTime(text) {
   return Math.max(1, Math.ceil(words / WPM));
 }
 
+/** true when frontmatter draft is explicitly true (boolean or string). Absent/false → published. */
+function isDraft(frontmatter) {
+  const d = frontmatter?.draft;
+  if (d === true) return true;
+  if (typeof d === 'string' && d.trim().toLowerCase() === 'true') return true;
+  return false;
+}
+
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
@@ -488,6 +496,10 @@ function build() {
       const filePath = path.join(categoryPath, file);
       const raw = fs.readFileSync(filePath, 'utf8');
       const { data: frontmatter, content } = matter(raw);
+      if (isDraft(frontmatter)) {
+        console.log('Skipped draft:', path.join(category, file));
+        continue;
+      }
       const slug = getSlug(filePath, frontmatter);
       currentBuildContext = { slug, filePath };
       const html = marked.parse(content);
