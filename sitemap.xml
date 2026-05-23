@@ -73,12 +73,6 @@
 
   </url>
   <url>
-    <loc>https://assertandreflect.com/tags/test.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-
-  </url>
-  <url>
     <loc>https://assertandreflect.com/tags/testing-strategy.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -119,12 +113,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod>2026-04-15T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>https://assertandreflect.com/reflections/test-from-n8n.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2025-05-23T00:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://assertandreflect.com/strategy/testing-as-risk-model.html</loc>

@@ -5,7 +5,7 @@
     <link>https://assertandreflect.com/</link>
     <description>Testing is about creating confidence. Practical guides, architecture strategy, and reflections on quality.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 May 2026 07:59:19 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 23 May 2026 08:00:21 GMT</lastBuildDate>
     <atom:link href="https://assertandreflect.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
     <title>Orchestrating Autonomous Test Workflows with n8n</title>
@@ -21,14 +21,6 @@
     <guid isPermaLink="true">https://assertandreflect.com/reflections/testing-the-unpredictable-llm-validation.html</guid>
     <description>When software becomes non-deterministic, your testing philosophy must shift from &quot;assert equal&quot; to &quot;evaluate probability.&quot;</description>
     <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
-    <category>reflections</category>
-  </item>
-  <item>
-    <title>Test Article From n8n</title>
-    <link>https://assertandreflect.com/reflections/test-from-n8n.html</link>
-    <guid isPermaLink="true">https://assertandreflect.com/reflections/test-from-n8n.html</guid>
-    <description>This is a test draft created by n8n.</description>
-    <pubDate>Fri, 23 May 2025 00:00:00 GMT</pubDate>
     <category>reflections</category>
   </item>
   <item>

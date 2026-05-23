@@ -44,20 +44,6 @@
     ]
   },
   {
-    "title": "Test Article From n8n",
-    "slug": "test-from-n8n",
-    "date": "2025-05-23",
-    "category": "reflections",
-    "excerpt": "This is a test draft created by n8n.",
-    "url": "/reflections/test-from-n8n.html",
-    "tags": [
-      {
-        "slug": "test",
-        "name": "Test"
-      }
-    ]
-  },
-  {
     "title": "Testing as a Risk Model",
     "slug": "testing-as-risk-model",
     "date": "2025-02-17",
